@@ -1,4 +1,5 @@
 import pygame
+from player import Player
 from logger import log_state
 from constants import SCREEN_HEIGHT, SCREEN_WIDTH
 
@@ -9,7 +10,11 @@ def main():
 
     # Game initialization
     pygame.init()
+
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+    clock = pygame.time.Clock()
+    dt = 0.0
+    player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
 
     # Game loop iteration
     while True:
@@ -20,9 +25,14 @@ def main():
                 return
 
         screen.fill("black")
+        player.draw(screen)
 
         # Screen refresh
         pygame.display.flip()
+
+        # FPS limitation
+        dt = clock.tick(60) / 1000
+
 
 
 
